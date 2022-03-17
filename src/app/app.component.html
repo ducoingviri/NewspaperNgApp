@@ -1,0 +1,30 @@
+<header>
+    <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+        <a href="/" class="navbar-brand">
+            <svg class="d-inline-block align-text-top" width="40" height="40" x="0px" y="0px" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;">
+                <style type="text/css">
+                    .st0{fill:#ED1E79;}
+                    .st1{fill:#FFFFFF;}
+                    .st2{font-family:'Consolas';}
+                    .st3{font-size:350px;}
+                </style>
+                <g>
+                    <rect x="0" class="st0" width="500" height="500"/>
+                </g>
+                <text transform="matrix(1 0 0 1 153.7839 365.4679)" class="st1 st2 st3">l</text>
+            </svg>
+        </a>
+
+        <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+            <a class="me-3 py-2 text-dark text-decoration-none" routerLink="post">Posts</a>
+            <a class="me-3 py-2 text-dark text-decoration-none" routerLink="post" *ngIf="isSignedIn">Profile</a>
+            <button class="btn btn-danger" (click)="signOut()" *ngIf="isSignedIn">Sign-out</button>
+            <button class="btn btn-success me-3" (click)="signIn()" *ngIf="!isSignedIn">Sign-in</button>
+            <button class="btn btn-primary" (click)="signUp()" *ngIf="!isSignedIn">Sign-up</button>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <router-outlet></router-outlet>
+</main>

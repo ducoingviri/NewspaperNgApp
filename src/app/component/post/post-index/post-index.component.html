@@ -1,0 +1,61 @@
+<div class="row mb-3">
+    <div class="col">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Author's name" [(ngModel)]="author" (keydown.enter)="findByAuthor()" />
+            <button class="btn btn-outline-secondary" type="button" (click)="findByAuthor()">Search</button>
+        </div>
+    </div>
+</div>
+<div class="row row-cols-1 row-cols-lg-2 row-cols-sm-2 g-3">
+    <div class="col-sm-4 col-lg-4">
+        <div *ngIf="isEmpty; then isEmptyThenBlock else isEmptyElseBlock"></div>
+        <ng-template #isEmptyThenBlock>
+            <div class="alert alert-warning d-flex align-items-center" role="alert">
+                <i class="bi bi-emoji-expressionless-fill flex-shrink-0 me-2"></i>
+                <div>
+                    No results
+                </div>
+            </div>
+            <button type="button" class="btn btn-outline-primary btn-sm" (click)="refresh()">Show All</button>
+        </ng-template>
+        <ng-template #isEmptyElseBlock>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor="let item of items; let i = index" [class.list-group-item-info]="i == currentIndex" (click)="activate(item, i)">
+                    <img src="https://picsum.photos/75" class="rounded float-start" alt="profile_pic">
+                    <div class="ms-2 me-auto">
+                        <div>
+                            <span class="fw-bold">{{ item.title }}</span>
+                        </div>
+                        <span class="fw-lighter small">by</span>
+                        <span class="fst-italic">{{ item.author }}</span>
+                        <span class="fw-lighter small">on</span>
+                        <span>{{ item.createdat | date:'MMM d, y' }}</span>
+                    </div>
+                    <div *ngIf="!item.ispublished">
+                        <i class="bi bi-eye-slash-fill"></i>
+                    </div>
+                </li>
+            </ul>
+        </ng-template>
+    </div>
+    <div class="col-sm-8 col-lg-8">
+        <div *ngIf="currentItem.id; then hasCurrentItemThenBlock else hasCurrentItemElseBlock"></div>
+        <ng-template #hasCurrentItemThenBlock>
+            <div *ngIf="isEditable; then isEditableThenBlock else isEditableElseBlock"></div>
+            <ng-template #isEditableThenBlock>
+                <app-post-edit [currentItem]="currentItem"></app-post-edit>
+            </ng-template>
+            <ng-template #isEditableElseBlock>
+                <app-post-show [currentItem]="currentItem" (isEditable)="getIsEditable($event)"></app-post-show>
+            </ng-template>
+        </ng-template>
+        <ng-template #hasCurrentItemElseBlock>
+            <div class="alert alert-info d-flex align-items-center" role="alert">
+                <i class="bi bi-info-circle-fill flex-shrink-0 me-2"></i>
+                <div>
+                    Choose a post
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>

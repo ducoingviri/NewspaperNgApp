@@ -1,0 +1,26 @@
+<div class="card">
+    <div class="card-header">
+        {{ currentItem.createdat | date:'EEEE, MMMM d, y' }}
+    </div>
+    <div class="card-body">
+        <form>
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" id="title" name="title" class="form-control" [(ngModel)]="modifiedItem.title">
+            </div>
+            <div class="mb-3">
+                <label for="brief" class="form-label">Brief</label>
+                <textarea id="brief" name="brief" class="form-control" maxlength="400" rows="5" [(ngModel)]="modifiedItem.brief">{{ currentItem.brief }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">Content</label>
+                <textarea id="content" name="content" class="form-control" maxlength="8000" rows="20" [(ngModel)]="modifiedItem.content">{{ currentItem.content }}</textarea>
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" id="ispublished" name="ispublished" class="form-check-input" [checked]="modifiedItem.ispublished" [(ngModel)]="modifiedItem.ispublished" >
+                <label for="ispublished" class="form-check-label">Is published?</label>
+            </div>
+            <button type="submit" class="btn btn-dark" (click)="update()">Submit</button>
+        </form>
+    </div>
+</div>

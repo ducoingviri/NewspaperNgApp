@@ -1,0 +1,37 @@
+<div *ngIf="currentItem.ispublished; then isPublishedThenBlock else isPublishedElseBlock"></div>
+<ng-template #isPublishedThenBlock>
+    <div class="p-4 p-md-5 mb-4 rounded border">
+        <div class="col-md-12 px-0">
+            <p class="lead text-end">{{ currentItem.createdat | date:'EEEE, MMMM d, y' }}</p>
+            <h1 class="display-5 text-center">{{ currentItem.title }}</h1>
+            <h5 class="text-center"><span class="fw-lighter">by</span> <span class="fst-italic">{{ currentItem.author }}</span></h5>
+            <p class="lead my-4 py-3 border-top border-bottom" style="white-space: pre-line;">{{ currentItem.brief }}</p>
+            <p class="lead mb-0" style="white-space: pre-line;">{{ currentItem.content }}</p>
+        </div>
+    </div>
+</ng-template>
+<ng-template #isPublishedElseBlock>
+    <div class="alert alert-info pb-0" role="alert">
+        <figure class="text-center">
+            <blockquote class="blockquote fst-italic">
+                <p>The author is waiting for the right moment to publish this post.</p>
+            </blockquote>
+            <figcaption class="blockquote-footer">
+                Us!
+            </figcaption>
+        </figure>
+    </div>
+</ng-template>
+<div class="alert border" role="alert">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-transparent">
+            Are you the author? <a class="text-decoration-none" (click)="edit(true)">Edit</a>
+        </li>
+        <li class="list-group-item bg-transparent">
+            Do you want to send a message to the author? <a class="text-decoration-none" (click)="edit(true)">Write</a>
+        </li>
+        <li class="list-group-item bg-transparent">
+            Do you want to support the author? <a class="text-decoration-none" (click)="edit(true)">Fund</a>
+        </li>
+    </ul>
+</div>
